@@ -36,7 +36,7 @@ The result after applying the region select mask is shown below
 ![alt text][image4]
 
 Then using Hough Transform identified all possible line segments that make up the lanes
-![alt text][image4]
+![alt text][image5]
 
 Finally from the Hough lines, computed the slopes for each and separated left lane lines (negative slope) from right (positive slope). Then the lines for each lane were extrapolated to draw a single solid line on each lane
 
@@ -45,18 +45,19 @@ In order to draw a single line for a lane, I created a new extrapolate_and_draw(
   - compute the average slope (m) of the lines (weighted average by line length to move the average closer to the longer segments)
   - compute an average X and Y point on the line (ave of all Xs and Ys)
   - now we can compute the intercept b from the equation Y = m*X + b
-  - With b,m and known Ys (y1 starts at the bottom of the image, and y2 at the top of the region for the extrapolated line), we can now compute x1 and x2
+  - With b,m and known Ys (y1 starts at the bottom of the image, and y2 at the top of the region for the extrapolated line), we can now compute x1 and x2 from the equation : 
       X = (Y-b) /m
   - Draw the line for the points (x1,y1) and (x2,y2)
   - Using the weighted_img method overlay the lane on the original image
   
 Output: 
-![alt text][image5]
+
+![alt text][image6]
 
 
 
 ###2. Identify potential shortcomings with your current pipeline
-- The method works for the first 2 videos, but fails in the challenge video when the lane is darkened by a shadow. I tried HSV filters instead of Grayscale but it does no work very well and fails on other videos too. NEed to figure a way to solve the challenge video
+- The method works for the first 2 videos, but fails on the challenge video when the lane is darkened by a shadow. I tried HSV filters instead of Grayscale but it does no work very well and fails on other videos too. Need to figure a way to solve the shadow problem
 - Another short coming is that this is tailored to specific conditions and may require coding up to handle new scenario  for e.g., if the lane splits into 2 (left turn lanes, lane merges etc.)
 
 
